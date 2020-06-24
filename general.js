@@ -1,7 +1,7 @@
 let canvas;
 
 let placeTransitionMatrix = new Matrix(3, 4);
-let stateVector = new Matrix(placeTransitionMatrix.getM);
+let stateVector = new Matrix(placeTransitionMatrix.getM, 1);
 
 let places = [];
 let transitions = [];
@@ -18,6 +18,9 @@ function setup() {
 			);
 		}
 	}
+
+	stateVector.setValueAtPosition(0, 0, 1);
+	console.log(stateVector);
 	console.log(placeTransitionMatrix.getVals);
 
 	for (let n = 0; n < placeTransitionMatrix.getN; n++) {
@@ -53,6 +56,7 @@ function keyPressed() {
 
 function draw() {
 	background(51, 51, 51);
+	fill(180, 180, 180);
 
 	transitions.forEach((transition) => {
 		transition.draw();
@@ -65,6 +69,13 @@ function draw() {
 	arrows.forEach((arrow) => {
 		arrow.draw();
 	});
+
+	for (let i = 0; i < stateVector.getVals.length; i++) {
+		if (stateVector.getVals[i] != 0) {
+			fill(0, 0, 0);
+			text(stateVector.getVals[i], places[i].getX, places[i].getY);
+		}
+	}
 }
 
 function centerCanvas() {
